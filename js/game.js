@@ -255,12 +255,12 @@
   };
 
   const doors = [
-    {room:"livingroom", x:519,y:90,r:72,target:"hallway",spawn:{x:480,y:465},label:"Corredor"},
-    {room:"livingroom", x:916,y:243,r:78,target:"kitchen",spawn:{x:95,y:270},label:"Cozinha"},
+    {room:"livingroom", x:480,y:30,r:72,target:"hallway",spawn:{x:480,y:465},label:"Corredor"},
+    {room:"livingroom", x:925,y:270,r:78,target:"kitchen",spawn:{x:95,y:270},label:"Cozinha"},
     {room:"hallway", x:480,y:505,r:75,target:"livingroom",spawn:{x:480,y:75},label:"Sala"},
-    {room:"hallway", x:733,y:302,r:87,target:"bedroomCouple",spawn:{x:480,y:465},label:"Quarto do casal"},
-    {room:"hallway", x:899,y:415,r:95,target:"bedroomML",spawn:{x:480,y:465},label:"Quarto da Maria Laura"},
-    {room:"hallway", x:85,y:308,r:111,target:"bathroom",spawn:{x:480,y:465},label:"Banheiro"},
+    {room:"hallway", x:180,y:35,r:75,target:"bedroomCouple",spawn:{x:480,y:465},label:"Quarto do casal"},
+    {room:"hallway", x:480,y:35,r:75,target:"bedroomML",spawn:{x:480,y:465},label:"Quarto da Maria Laura"},
+    {room:"hallway", x:780,y:35,r:75,target:"bathroom",spawn:{x:480,y:465},label:"Banheiro"},
     {room:"kitchen", x:35,y:270,r:78,target:"livingroom",spawn:{x:885,y:270},label:"Sala"},
     {room:"bedroomCouple", x:480,y:505,r:75,target:"hallway",spawn:{x:180,y:80},label:"Corredor"},
     {room:"bedroomML", x:480,y:505,r:75,target:"hallway",spawn:{x:480,y:80},label:"Corredor"},
@@ -270,7 +270,7 @@
   const interactables = [
     // SALA
     {
-      room:"livingroom", x:257,y:148,r:153,
+      room:"livingroom", x:245,y:215,r:145,
       label:"procurar entre as almofadas do sofá",
       action(){
         if(state.flags.sofaSearched){
@@ -281,7 +281,7 @@
       }
     },
     {
-      room:"livingroom", x:743,y:153,r:113,
+      room:"livingroom", x:765,y:245,r:145,
       label:"usar a TV",
       action(){
         if(state.collected.phone){
@@ -304,7 +304,7 @@
       }
     },
     {
-      room:"livingroom", x:331,y:392,r:100,
+      room:"livingroom", x:565,y:410,r:120,
       label:"examinar as gavetas da mesa de jantar",
       action(){
         if(state.collected.wallet){
@@ -317,7 +317,7 @@
 
     // COZINHA
     {
-      room:"kitchen", x:458,y:165,r:100,
+      room:"kitchen", x:470,y:245,r:120,
       label:"examinar o bilhete sobre a bancada",
       available(){ return !state.flags.kitchenNoteRead && !state.collected.watch; },
       action(){
@@ -326,7 +326,7 @@
       }
     },
     {
-      room:"kitchen", x:209,y:204,r:140,
+      room:"kitchen", x:245,y:230,r:140,
       label:"abrir a geladeira",
       action(){
         if(state.collected.watch){
@@ -343,7 +343,7 @@
       }
     },
     {
-      room:"kitchen", x:732,y:219,r:67,
+      room:"kitchen", x:720,y:245,r:115,
       label:"abrir o forno",
       action(){
         if(!state.flags.ovenJokeSeen){
@@ -357,12 +357,12 @@
 
     // CORREDOR
     {
-      room:"hallway", x:471,y:204,r:159,
+      room:"hallway", x:480,y:260,r:135,
       label:"examinar a estante",
       action(){ state.activePuzzle={type:"hallwayShelf",page:0}; }
     },
     {
-      room:"hallway", x:225,y:339,r:53,
+      room:"hallway", x:760,y:340,r:105,
       label:"abrir o cesto de roupa",
       action(){
         if(!state.flags.hallwayBasketSeen){
@@ -376,7 +376,7 @@
 
     // QUARTO DO CASAL
     {
-      room:"bedroomCouple", x:186,y:253,r:68,
+      room:"bedroomCouple", x:390,y:330,r:120,
       label:"olhar debaixo do travesseiro do Lucas",
       action(){
         if(!state.flags.mangaFound){
@@ -388,7 +388,7 @@
       }
     },
     {
-      room:"bedroomCouple", x:325,y:253,r:72,
+      room:"bedroomCouple", x:570,y:330,r:120,
       label:"olhar debaixo do outro travesseiro",
       action(){
         if(!state.flags.kindleFound){
@@ -400,7 +400,7 @@
       }
     },
     {
-      room:"bedroomCouple", x:589,y:201,r:142,
+      room:"bedroomCouple", x:245,y:365,r:190,
       label:"abrir o guarda-roupa e examinar as malas",
       action(){
         if(state.collected.houseKey){
@@ -428,7 +428,7 @@
 
     // QUARTO DA MARIA LAURA
     {
-      room:"bedroomML", x:397,y:267,r:58,
+      room:"bedroomML", x:610,y:340,r:130,
       label:"abrir o baú",
       action(){
         if(state.flags.mlChestOpened){
@@ -445,20 +445,20 @@
       }
     },
     {
-      room:"bedroomML", x:838,y:270,r:120,
+      room:"bedroomML", x:145,y:250,r:120,
       label:"examinar a estante-casinha",
       action(){ say("Jogos de tabuleiro, livros e mais jogos de tabuleiro.",220); }
     },
 
     // BANHEIRO
     {
-      room:"bathroom", x:649,y:123,r:128,
+      room:"bathroom", x:255,y:230,r:140,
       label:"limpar o espelho embaçado",
       available(){ return !state.flags.mirrorRead; },
       action(){ state.activePuzzle={type:"mirrorClean",progress:0}; }
     },
     {
-      room:"bathroom", x:537,y:202,r:90,
+      room:"bathroom", x:720,y:250,r:150,
       label:"examinar o porta-escovas",
       available(){ return state.flags.mirrorRead; },
       action(){
@@ -848,15 +848,6 @@ function saveHitboxOverrides(){
       return true;
     }
 
-    if(puzzle.type === "sequence"){
-      [330,480,630].forEach((bx,index)=>{
-        if(x>=bx-55 && x<=bx+55 && y>=225 && y<=330){
-          press(String(index+1));
-        }
-      });
-      return true;
-    }
-
     if(["sofa","bathroom"].includes(puzzle.type)){
       press("e");
       return true;
@@ -998,103 +989,11 @@ if (state.screen === "menu") {
     button.addEventListener("pointerleave", end);
   });
 
-  const interactButton = document.querySelector("[data-action='interact']");
-
-  interactButton.addEventListener("pointerdown", (event) => {
+  document.querySelector("[data-action='interact']").addEventListener("pointerdown", (event) => {
     event.preventDefault();
-    if(interactButton.disabled) return;
     ensureAudio();
     press("e");
   });
-
-  function puzzleNeedsInteractButton(){
-    const type = state.activePuzzle?.type;
-    return [
-      "sofa",
-      "drawerChoice",
-      "kitchenNote",
-      "lunchbox",
-      "ovenJoke",
-      "hallwayShelf",
-      "wordLock",
-      "suitcaseOpen",
-      "mirrorClean",
-      "toothbrushCup",
-      "tvPassword"
-    ].includes(type);
-  }
-
-  function updateInteractButton(){
-    if(!interactButton) return;
-
-    let available = false;
-    let label = "INTERAGIR";
-
-    if(state.screen === "game" && !state.transition.active && !state.inventoryOpen){
-      if(state.activePuzzle){
-        available = puzzleNeedsInteractButton();
-        label = state.activePuzzle.type === "hallwayShelf" ? "AVANÇAR" : "CONTINUAR";
-      }else{
-        const interaction = nearbyInteraction();
-        const door = nearbyDoor();
-        available = Boolean(interaction || door);
-        label = door && !interaction ? "ENTRAR" : "INTERAGIR";
-      }
-    }
-
-    interactButton.disabled = !available;
-    interactButton.classList.toggle("available", available);
-    const labelElement = interactButton.querySelector(".interact-label");
-    if(labelElement) labelElement.textContent = label;
-  }
-
-
-  const puzzleKeyboard = document.getElementById("puzzleKeyboard");
-  let puzzleKeyboardMode = "";
-
-  function sendVirtualKey(key){
-    ensureAudio();
-    press(key.toLowerCase());
-  }
-
-  function rebuildPuzzleKeyboard(mode){
-    if(!puzzleKeyboard || puzzleKeyboardMode === mode) return;
-    puzzleKeyboardMode = mode;
-    puzzleKeyboard.innerHTML = "";
-
-    const keys = mode === "letters"
-      ? [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ", "⌫", "OK"]
-      : mode === "numbers"
-        ? ["1", "2", "3"]
-        : [];
-
-    keys.forEach(label=>{
-      const button = document.createElement("button");
-      button.type = "button";
-      button.textContent = label;
-      if(label === "⌫" || label === "OK") button.classList.add("wide");
-      button.addEventListener("pointerdown", event=>{
-        event.preventDefault();
-        if(label === "⌫") sendVirtualKey("backspace");
-        else if(label === "OK") sendVirtualKey("enter");
-        else sendVirtualKey(label);
-      });
-      puzzleKeyboard.appendChild(button);
-    });
-  }
-
-  function updatePuzzleKeyboard(){
-    if(!puzzleKeyboard) return;
-    const puzzle = state.activePuzzle;
-    const mode = puzzle?.type === "wordLock"
-      ? "letters"
-      : puzzle?.type === "sequence"
-        ? "numbers"
-        : "";
-
-    rebuildPuzzleKeyboard(mode);
-    puzzleKeyboard.classList.toggle("visible", Boolean(mode));
-  }
 
   document.querySelector("[data-action='inventory']").addEventListener("pointerdown", (event) => {
     event.preventDefault();
@@ -1346,13 +1245,6 @@ if (state.screen === "menu") {
     }
   }
 
-
-  const isTouchDevice = window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
-
-  function interactionPrompt(actionText){
-    return isTouchDevice ? actionText : "Pressione E para " + actionText;
-  }
-
   function updateWorldInteractions(){
     if(state.activePuzzle || state.inventoryOpen) return;
 
@@ -1360,7 +1252,7 @@ if (state.screen === "menu") {
     const door = nearbyDoor();
 
     if(interaction){
-      say(interactionPrompt(interaction.label), 3);
+      say("Pressione E para " + interaction.label, 3);
 
       if(consume("e"," ","enter")){
         interaction.action();
@@ -1375,7 +1267,7 @@ if (state.screen === "menu") {
         return;
       }
 
-      say(isTouchDevice ? "Entrar em " + door.label : "Pressione E para entrar em " + door.label, 3);
+      say("Pressione E para entrar em " + door.label, 3);
 
       if(consume("e"," ","enter")){
         beginRoomTransition(door.target, door.spawn);
@@ -2081,7 +1973,6 @@ rooms[state.room].obstacles.forEach(o => {
         drawText(String(n),x,285,32,"#fff","center","bold");
       });
       drawText("Digitado: "+(p.sequence.join(" - ")||"..."),480,390,24,"#392615","center","bold");
-      drawText("Toque nas cores na ordem correta.",480,430,18,"#60462e","center");
     }
 
     if(p.type==="lunchbox"){
@@ -2115,7 +2006,7 @@ rooms[state.room].obstacles.forEach(o => {
       drawText(p.title+" TRANCADO",480,110,30,"#392615","center","bold");
       drawText(p.hint,480,180,22,"#60462e","center");
       drawText((p.input+"_".repeat(p.answer.length)).slice(0,p.answer.length).split("").join("  "),480,285,34,"#392615","center","bold");
-      drawText("Digite abaixo e toque em OK.",480,390,20,"#60462e","center");
+      drawText("Digite no teclado e pressione ENTER.",480,390,20,"#60462e","center");
     }
 
     if(p.type==="suitcaseOpen"){
@@ -2227,8 +2118,6 @@ rooms[state.room].obstacles.forEach(o => {
   function loop(){
     update();
     draw();
-    updatePuzzleKeyboard();
-    updateInteractButton();
     requestAnimationFrame(loop);
   }
 

@@ -1,9 +1,12 @@
-LUCAS QUEST — VERSÃO MOBILE CORRIGIDA
+LUCAS QUEST — VERSÃO UNIFICADA MOBILE v1.1
 
-• Jogue com o celular na horizontal.
-• Setas na esquerda: movimentação.
-• INTERAGIR: substitui a tecla E, inclusive dentro dos puzzles.
-• Mochila: abre e fecha o inventário.
-• O teclado de letras/números aparece automaticamente quando necessário.
+Base: versão v7.1 estável, com as colisões e interações preservadas.
 
-Para publicar, envie todo o conteúdo desta pasta para o GitHub Pages.
+Alterações desta versão:
+- Controles por toque sobrepostos à tela no celular.
+- Botão INTERAGIR usa exatamente a mesma ação da tecla E.
+- O mesmo botão funciona em portas, objetos e etapas de puzzles que usam E.
+- Mochila permanece visível no modo horizontal.
+- Aviso para girar o celular quando estiver na vertical.
+
+No computador, o jogo continua funcionando pelo teclado.
