@@ -1452,6 +1452,42 @@ if (state.screen === "menu") {
       return;
     }
 
+    if(puzzle.type==="sequence"){
+  const buttons = [
+    [1,330],
+    [2,480],
+    [3,630]
+  ];
+
+  for(const [number,bx] of buttons){
+    if(
+      x>=bx-50 &&
+      x<=bx+50 &&
+      y>=235 &&
+      y<=315
+    ){
+      puzzle.sequence.push(number);
+
+      const index = puzzle.sequence.length - 1;
+
+      if(puzzle.sequence[index] !== puzzle.target[index]){
+        puzzle.sequence = [];
+        playErrorSound();
+        say("Sequência errada. Tente novamente.",130);
+      }else if(puzzle.sequence.length === 3){
+        state.activePuzzle = {
+          type:"lunchbox",
+          stage:0
+        };
+      }
+
+      return true;
+    }
+  }
+
+  return true;
+}
+
     if(puzzle.type==="drawerChoice"){
   if(consume("arrowleft","a")){
     puzzle.cursor = Math.max(0, puzzle.cursor - 1);
@@ -2088,15 +2124,38 @@ ctx.fillRect(0,0,60,60);
     }
 
     if(p.type==="sequence"){
-      drawText("TRAVA DA GELADEIRA",480,110,30,"#392615","center","bold");
-      drawText("Vermelho = 1   Amarelo = 2   Azul = 3",480,180,21,"#60462e","center");
-      const data=[[1,"#bd5d5d"],[2,"#d4b34c"],[3,"#5e84aa"]];
-      data.forEach(([n,c],i)=>{
-        const x=330+i*150;ctx.fillStyle=c;ctx.fillRect(x-50,235,100,80);
-        drawText(String(n),x,285,32,"#fff","center","bold");
-      });
-      drawText("Digitado: "+(p.sequence.join(" - ")||"..."),480,390,24,"#392615","center","bold");
-    }
+  drawText("TRAVA DA GELADEIRA",480,110,30,"#392615","center","bold");
+  drawText("Vermelho = 1   Amarelo = 2   Azul = 3",480,180,21,"#60462e","center");
+
+  const data=[
+    [1,"#bd5d5d",330],
+    [2,"#d4b34c",480],
+    [3,"#5e84aa",630]
+  ];
+
+  data.forEach(([n,c,x])=>{
+    ctx.fillStyle=c;
+    ctx.fillRect(x-50,235,100,80);
+
+    ctx.strokeStyle="#5b3c24";
+    ctx.lineWidth=2;
+    ctx.strokeRect(x-50,235,100,80);
+
+    drawText(String(n),x,285,32,"#fff","center","bold");
+  });
+
+  drawText(
+    "Digitado: "+(p.sequence.join(" - ")||"..."),
+    480,
+    390,
+    24,
+    "#392615",
+    "center",
+    "bold"
+  );
+
+  drawText("Toque nos números.",480,435,18,"#60462e","center");
+}
 
     if(p.type==="lunchbox"){
       drawText("DENTRO DA GELADEIRA",480,115,30,"#392615","center","bold");
