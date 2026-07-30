@@ -1,12 +1,11 @@
-LUCAS QUEST — VERSÃO UNIFICADA MOBILE v1.1
+LUCAS QUEST — versão unificada mobile v1.3
 
-Base: versão v7.1 estável, com as colisões e interações preservadas.
+Correções desta versão:
+- botão INTERAGIR executa o mesmo comando da tecla E, inclusive dentro dos puzzles;
+- coordenadas finais de portas e interações incorporadas ao jogo;
+- novo identificador de armazenamento para ignorar colisões antigas salvas no navegador;
+- no celular, colisões retangulares antigas são desativadas para impedir bloqueios incompatíveis com os backgrounds;
+- arquivos CSS e JS usam versão no endereço para evitar cache antigo no GitHub Pages.
 
-Alterações desta versão:
-- Controles por toque sobrepostos à tela no celular.
-- Botão INTERAGIR usa exatamente a mesma ação da tecla E.
-- O mesmo botão funciona em portas, objetos e etapas de puzzles que usam E.
-- Mochila permanece visível no modo horizontal.
-- Aviso para girar o celular quando estiver na vertical.
-
-No computador, o jogo continua funcionando pelo teclado.
+Para atualizar o GitHub Pages, envie todos os arquivos desta pasta substituindo os existentes.
+Depois, abra o site em uma aba anônima ou recarregue a página.

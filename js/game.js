@@ -198,6 +198,11 @@
     pressed: new Set()
   };
 
+  // No celular, priorizamos a jogabilidade e evitamos colisões antigas
+  // salvas no navegador bloqueando áreas que não correspondem ao cenário.
+  const isTouchDevice = window.matchMedia("(pointer: coarse)").matches ||
+    (navigator.maxTouchPoints || 0) > 0;
+
   const rooms = {
     livingroom: {
       name: "Sala",
@@ -472,7 +477,7 @@
   ];
 
 
-  const HITBOX_STORAGE_KEY = "lucasQuestHitboxesV7";
+  const HITBOX_STORAGE_KEY = "lucasQuestHitboxesV13";
 
   interactables.forEach((item,index)=>{
     if(!item.id){
@@ -695,6 +700,16 @@ function saveHitboxOverrides(){
   }
 
   loadHitboxOverrides();
+
+  // Coordenadas finais aprovadas: valem igualmente no computador e no celular.
+  const FINAL_APPROVED_HITBOXES = {"interaction_livingroom_0":{"room":"livingroom","kind":"interaction","label":"procurar entre as almofadas do sofá","x":257,"y":148,"r":153},"interaction_livingroom_1":{"room":"livingroom","kind":"interaction","label":"usar a TV","x":743,"y":153,"r":113},"interaction_livingroom_2":{"room":"livingroom","kind":"interaction","label":"examinar as gavetas da mesa de jantar","x":331,"y":392,"r":100},"interaction_kitchen_3":{"room":"kitchen","kind":"interaction","label":"examinar o bilhete sobre a bancada","x":458,"y":165,"r":100},"interaction_kitchen_4":{"room":"kitchen","kind":"interaction","label":"abrir a geladeira","x":209,"y":204,"r":140},"interaction_kitchen_5":{"room":"kitchen","kind":"interaction","label":"abrir o forno","x":732,"y":219,"r":67},"interaction_hallway_6":{"room":"hallway","kind":"interaction","label":"examinar a estante","x":471,"y":204,"r":159},"interaction_hallway_7":{"room":"hallway","kind":"interaction","label":"abrir o cesto de roupa","x":225,"y":339,"r":53},"interaction_bedroomCouple_8":{"room":"bedroomCouple","kind":"interaction","label":"olhar debaixo do travesseiro do Lucas","x":186,"y":253,"r":68},"interaction_bedroomCouple_9":{"room":"bedroomCouple","kind":"interaction","label":"olhar debaixo do outro travesseiro","x":325,"y":253,"r":72},"interaction_bedroomCouple_10":{"room":"bedroomCouple","kind":"interaction","label":"abrir o guarda-roupa e examinar as malas","x":589,"y":201,"r":142},"interaction_bedroomML_11":{"room":"bedroomML","kind":"interaction","label":"abrir o baú","x":397,"y":267,"r":58},"interaction_bedroomML_12":{"room":"bedroomML","kind":"interaction","label":"examinar a estante-casinha","x":838,"y":270,"r":120},"interaction_bathroom_13":{"room":"bathroom","kind":"interaction","label":"limpar o espelho embaçado","x":649,"y":123,"r":128},"interaction_bathroom_14":{"room":"bathroom","kind":"interaction","label":"examinar o porta-escovas","x":537,"y":202,"r":90},"door_livingroom_hallway_0":{"room":"livingroom","kind":"door","label":"Corredor","x":519,"y":90,"r":72},"door_livingroom_kitchen_1":{"room":"livingroom","kind":"door","label":"Cozinha","x":916,"y":243,"r":78},"door_hallway_livingroom_2":{"room":"hallway","kind":"door","label":"Sala","x":480,"y":505,"r":75},"door_hallway_bedroomCouple_3":{"room":"hallway","kind":"door","label":"Quarto do casal","x":733,"y":302,"r":87},"door_hallway_bedroomML_4":{"room":"hallway","kind":"door","label":"Quarto da Maria Laura","x":899,"y":415,"r":95},"door_hallway_bathroom_5":{"room":"hallway","kind":"door","label":"Banheiro","x":85,"y":308,"r":111},"door_kitchen_livingroom_6":{"room":"kitchen","kind":"door","label":"Sala","x":35,"y":270,"r":78},"door_bedroomCouple_hallway_7":{"room":"bedroomCouple","kind":"door","label":"Corredor","x":480,"y":505,"r":75},"door_bedroomML_hallway_8":{"room":"bedroomML","kind":"door","label":"Corredor","x":480,"y":505,"r":75},"door_bathroom_hallway_9":{"room":"bathroom","kind":"door","label":"Corredor","x":480,"y":505,"r":75}};
+  allHitboxes().forEach(item => {
+    const value = FINAL_APPROVED_HITBOXES[item.id];
+    if(!value) return;
+    if(Number.isFinite(value.x)) item.x = value.x;
+    if(Number.isFinite(value.y)) item.y = value.y;
+    if(Number.isFinite(value.r)) item.r = Math.max(12, value.r);
+  });
 
   function dist(ax, ay, bx, by){
     return Math.hypot(bx - ax, by - ay);
@@ -989,10 +1004,26 @@ if (state.screen === "menu") {
     button.addEventListener("pointerleave", end);
   });
 
-  document.querySelector("[data-action='interact']").addEventListener("pointerdown", (event) => {
-    event.preventDefault();
-    ensureAudio();
+  function triggerInteractAction(){
     press("e");
+
+    // Em puzzles, processa imediatamente o mesmo comando usado pela tecla E.
+    // Isso evita que o toque seja perdido entre eventos do navegador móvel.
+    if(state.screen === "game" && state.activePuzzle){
+      updatePuzzle();
+    }
+  }
+
+  const interactButton = document.querySelector("[data-action='interact']");
+  interactButton.addEventListener("pointerdown", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    ensureAudio();
+    triggerInteractAction();
+  });
+
+  interactButton.addEventListener("contextmenu", (event) => {
+    event.preventDefault();
   });
 
   document.querySelector("[data-action='inventory']").addEventListener("pointerdown", (event) => {
@@ -1086,6 +1117,10 @@ if (state.screen === "menu") {
   }
 
   function currentObstacleCollision(x, y){
+    // Os retângulos de colisão editáveis foram criados para o layout de desktop.
+    // Em telas de toque eles estavam bloqueando zonas livres do background.
+    if(isTouchDevice) return false;
+
     const left = x - player.w/2;
     const right = x + player.w/2;
     const top = y - player.h/2;
