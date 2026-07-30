@@ -2008,6 +2008,8 @@ rooms[state.room].obstacles.forEach(o => {
     ctx.fillStyle="rgba(0,0,0,.82)";
     ctx.fillRect(0,0,W,H);
     drawPixelPanel(105,50,750,440);
+    ctx.fillStyle = "#ff0000";
+ctx.fillRect(0,0,60,60);
     const p=state.activePuzzle;
 
     if(p.type==="sofa"){
