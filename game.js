@@ -2021,11 +2021,49 @@ rooms[state.room].obstacles.forEach(o => {
     }
 
     if(p.type==="tvPassword"){
-      drawText("SMART TV",480,100,30,"#392615","center","bold");
-      drawText("Digite a senha da mamãe",480,150,21,"#60462e","center");
-      drawText((p.digits+"____").slice(0,4).split("").map(v=>v==="_"?"_":"●").join("  "),480,215,36,"#392615","center","bold");
-      drawText("Digite os números e pressione ENTER.",480,310,20,"#60462e","center");
-    }
+  drawText("SMART TV",480,100,30,"#392615","center","bold");
+  drawText("Digite a senha da mamãe",480,150,21,"#60462e","center");
+
+  drawText(
+    (p.digits+"____")
+      .slice(0,4)
+      .split("")
+      .map(v=>v==="_"?"_":"●")
+      .join("  "),
+    480,
+    215,
+    36,
+    "#392615",
+    "center",
+    "bold"
+  );
+
+  const buttons = [
+    [1,330,245],[2,430,245],[3,530,245],
+    [4,330,300],[5,430,300],[6,530,300],
+    [7,330,355],[8,430,355],[9,530,355],
+    [0,430,410]
+  ];
+
+  buttons.forEach(([n,x,y])=>{
+    ctx.fillStyle="#9b6841";
+    ctx.fillRect(x-35,y-22,70,44);
+
+    ctx.strokeStyle="#5b3c24";
+    ctx.lineWidth=2;
+    ctx.strokeRect(x-35,y-22,70,44);
+
+    drawText(String(n),x,y+8,22,"#fff","center","bold");
+  });
+
+  ctx.fillStyle="#7c9c70";
+  ctx.fillRect(690,385,95,45);
+  drawText("OK",737,414,20,"#fff","center","bold");
+
+  ctx.fillStyle="#b15d5d";
+  ctx.fillRect(585,385,95,45);
+  drawText("⌫",632,414,20,"#fff","center","bold");
+}
 
     if(p.type==="drawerChoice"){
       drawText("AS TRÊS GAVETAS",480,115,30,"#392615","center","bold");
