@@ -1,0 +1,189 @@
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  background:#171717;
+  font-family:Arial, Helvetica, sans-serif;
+  overscroll-behavior:none;
+}
+
+body{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+
+#app{
+  width:min(100vw, 960px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  padding:8px;
+}
+
+canvas{
+  width:100%;
+  height:auto;
+  max-height:calc(100vh - 130px);
+  border:6px solid #5b3c24;
+  border-radius:10px;
+  background:#000;
+  image-rendering:pixelated;
+  touch-action:none;
+}
+
+#mobileControls{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+  user-select:none;
+}
+
+#mobileControls button{
+  min-width:56px;
+  min-height:48px;
+  border:0;
+  border-radius:12px;
+  background:#f0d8a9;
+  color:#392615;
+  font-size:22px;
+  font-weight:700;
+  box-shadow:0 4px 0 #8b6037;
+  touch-action:none;
+}
+
+#mobileControls button:active{
+  transform:translateY(3px);
+  box-shadow:0 1px 0 #8b6037;
+}
+
+.dpad{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+}
+
+.dpad div{
+  display:flex;
+  gap:6px;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+}
+
+@media (min-width:900px) and (pointer:fine){
+  #mobileControls{
+    display:none;
+  }
+
+  canvas{
+    max-height:96vh;
+  }
+}
+
+
+#puzzleKeyboard{
+  display:none;
+  width:100%;
+  max-width:760px;
+  grid-template-columns:repeat(10,1fr);
+  gap:6px;
+  padding:4px;
+  user-select:none;
+}
+
+#puzzleKeyboard.visible{display:grid;}
+
+#puzzleKeyboard button{
+  min-height:42px;
+  border:0;
+  border-radius:9px;
+  background:#f0d8a9;
+  color:#392615;
+  font-size:18px;
+  font-weight:800;
+  box-shadow:0 3px 0 #8b6037;
+  touch-action:manipulation;
+}
+
+#puzzleKeyboard button.wide{grid-column:span 2;}
+#puzzleKeyboard button:active{transform:translateY(2px);box-shadow:0 1px 0 #8b6037;}
+
+#rotateHint{
+  display:none;
+  color:#f7e7c3;
+  font-size:14px;
+  text-align:center;
+  padding:2px 8px 8px;
+}
+
+@media (max-width:700px) and (orientation:portrait){
+  #rotateHint{display:block;}
+  canvas{max-height:54vh;}
+  #mobileControls button{min-width:50px;min-height:44px;}
+}
+
+@media (max-height:500px){
+  #app{padding:3px;gap:4px;}
+  canvas{max-height:calc(100vh - 78px);border-width:3px;}
+  #mobileControls button{min-height:38px;min-width:48px;font-size:18px;}
+  #puzzleKeyboard button{min-height:32px;font-size:15px;}
+}
+
+
+/* Botão contextual que substitui a tecla E no celular */
+.interact-button{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  min-width:132px !important;
+  padding:0 14px;
+  opacity:.28;
+  transform:scale(.94);
+  pointer-events:none;
+  transition:opacity .16s ease, transform .16s ease, filter .16s ease;
+}
+
+.interact-button.available{
+  opacity:1;
+  transform:scale(1);
+  pointer-events:auto;
+  filter:drop-shadow(0 0 7px rgba(240,198,79,.55));
+  animation:interactPulse 1.25s ease-in-out infinite;
+}
+
+.interact-button .interact-icon{
+  font-size:24px;
+  line-height:1;
+}
+
+.interact-button .interact-label{
+  font-size:15px;
+  letter-spacing:.4px;
+  white-space:nowrap;
+}
+
+@keyframes interactPulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.045)}
+}
+
+@media (max-height:500px){
+  .interact-button{
+    min-width:112px !important;
+    padding:0 9px;
+  }
+  .interact-button .interact-label{font-size:12px;}
+  .interact-button .interact-icon{font-size:19px;}
+}
