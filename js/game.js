@@ -255,12 +255,12 @@
   };
 
   const doors = [
-    {room:"livingroom", x:480,y:30,r:72,target:"hallway",spawn:{x:480,y:465},label:"Corredor"},
-    {room:"livingroom", x:925,y:270,r:78,target:"kitchen",spawn:{x:95,y:270},label:"Cozinha"},
+    {room:"livingroom", x:519,y:90,r:72,target:"hallway",spawn:{x:480,y:465},label:"Corredor"},
+    {room:"livingroom", x:916,y:243,r:78,target:"kitchen",spawn:{x:95,y:270},label:"Cozinha"},
     {room:"hallway", x:480,y:505,r:75,target:"livingroom",spawn:{x:480,y:75},label:"Sala"},
-    {room:"hallway", x:180,y:35,r:75,target:"bedroomCouple",spawn:{x:480,y:465},label:"Quarto do casal"},
-    {room:"hallway", x:480,y:35,r:75,target:"bedroomML",spawn:{x:480,y:465},label:"Quarto da Maria Laura"},
-    {room:"hallway", x:780,y:35,r:75,target:"bathroom",spawn:{x:480,y:465},label:"Banheiro"},
+    {room:"hallway", x:733,y:302,r:87,target:"bedroomCouple",spawn:{x:480,y:465},label:"Quarto do casal"},
+    {room:"hallway", x:899,y:415,r:95,target:"bedroomML",spawn:{x:480,y:465},label:"Quarto da Maria Laura"},
+    {room:"hallway", x:85,y:308,r:111,target:"bathroom",spawn:{x:480,y:465},label:"Banheiro"},
     {room:"kitchen", x:35,y:270,r:78,target:"livingroom",spawn:{x:885,y:270},label:"Sala"},
     {room:"bedroomCouple", x:480,y:505,r:75,target:"hallway",spawn:{x:180,y:80},label:"Corredor"},
     {room:"bedroomML", x:480,y:505,r:75,target:"hallway",spawn:{x:480,y:80},label:"Corredor"},
@@ -270,7 +270,7 @@
   const interactables = [
     // SALA
     {
-      room:"livingroom", x:245,y:215,r:145,
+      room:"livingroom", x:257,y:148,r:153,
       label:"procurar entre as almofadas do sofá",
       action(){
         if(state.flags.sofaSearched){
@@ -281,7 +281,7 @@
       }
     },
     {
-      room:"livingroom", x:765,y:245,r:145,
+      room:"livingroom", x:743,y:153,r:113,
       label:"usar a TV",
       action(){
         if(state.collected.phone){
@@ -304,7 +304,7 @@
       }
     },
     {
-      room:"livingroom", x:565,y:410,r:120,
+      room:"livingroom", x:331,y:392,r:100,
       label:"examinar as gavetas da mesa de jantar",
       action(){
         if(state.collected.wallet){
@@ -317,7 +317,7 @@
 
     // COZINHA
     {
-      room:"kitchen", x:470,y:245,r:120,
+      room:"kitchen", x:458,y:165,r:100,
       label:"examinar o bilhete sobre a bancada",
       available(){ return !state.flags.kitchenNoteRead && !state.collected.watch; },
       action(){
@@ -326,7 +326,7 @@
       }
     },
     {
-      room:"kitchen", x:245,y:230,r:140,
+      room:"kitchen", x:209,y:204,r:140,
       label:"abrir a geladeira",
       action(){
         if(state.collected.watch){
@@ -343,7 +343,7 @@
       }
     },
     {
-      room:"kitchen", x:720,y:245,r:115,
+      room:"kitchen", x:732,y:219,r:67,
       label:"abrir o forno",
       action(){
         if(!state.flags.ovenJokeSeen){
@@ -357,12 +357,12 @@
 
     // CORREDOR
     {
-      room:"hallway", x:480,y:260,r:135,
+      room:"hallway", x:471,y:204,r:159,
       label:"examinar a estante",
       action(){ state.activePuzzle={type:"hallwayShelf",page:0}; }
     },
     {
-      room:"hallway", x:760,y:340,r:105,
+      room:"hallway", x:225,y:339,r:53,
       label:"abrir o cesto de roupa",
       action(){
         if(!state.flags.hallwayBasketSeen){
@@ -376,7 +376,7 @@
 
     // QUARTO DO CASAL
     {
-      room:"bedroomCouple", x:390,y:330,r:120,
+      room:"bedroomCouple", x:186,y:253,r:68,
       label:"olhar debaixo do travesseiro do Lucas",
       action(){
         if(!state.flags.mangaFound){
@@ -388,7 +388,7 @@
       }
     },
     {
-      room:"bedroomCouple", x:570,y:330,r:120,
+      room:"bedroomCouple", x:325,y:253,r:72,
       label:"olhar debaixo do outro travesseiro",
       action(){
         if(!state.flags.kindleFound){
@@ -400,7 +400,7 @@
       }
     },
     {
-      room:"bedroomCouple", x:245,y:365,r:190,
+      room:"bedroomCouple", x:589,y:201,r:142,
       label:"abrir o guarda-roupa e examinar as malas",
       action(){
         if(state.collected.houseKey){
@@ -428,7 +428,7 @@
 
     // QUARTO DA MARIA LAURA
     {
-      room:"bedroomML", x:610,y:340,r:130,
+      room:"bedroomML", x:397,y:267,r:58,
       label:"abrir o baú",
       action(){
         if(state.flags.mlChestOpened){
@@ -445,20 +445,20 @@
       }
     },
     {
-      room:"bedroomML", x:145,y:250,r:120,
+      room:"bedroomML", x:838,y:270,r:120,
       label:"examinar a estante-casinha",
       action(){ say("Jogos de tabuleiro, livros e mais jogos de tabuleiro.",220); }
     },
 
     // BANHEIRO
     {
-      room:"bathroom", x:255,y:230,r:140,
+      room:"bathroom", x:649,y:123,r:128,
       label:"limpar o espelho embaçado",
       available(){ return !state.flags.mirrorRead; },
       action(){ state.activePuzzle={type:"mirrorClean",progress:0}; }
     },
     {
-      room:"bathroom", x:720,y:250,r:150,
+      room:"bathroom", x:537,y:202,r:90,
       label:"examinar o porta-escovas",
       available(){ return state.flags.mirrorRead; },
       action(){
@@ -1016,9 +1016,11 @@ if (state.screen === "menu") {
       "lunchbox",
       "ovenJoke",
       "hallwayShelf",
+      "wordLock",
       "suitcaseOpen",
       "mirrorClean",
-      "toothbrushCup"
+      "toothbrushCup",
+      "tvPassword"
     ].includes(type);
   }
 
@@ -1344,6 +1346,13 @@ if (state.screen === "menu") {
     }
   }
 
+
+  const isTouchDevice = window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
+
+  function interactionPrompt(actionText){
+    return isTouchDevice ? actionText : "Pressione E para " + actionText;
+  }
+
   function updateWorldInteractions(){
     if(state.activePuzzle || state.inventoryOpen) return;
 
@@ -1351,7 +1360,7 @@ if (state.screen === "menu") {
     const door = nearbyDoor();
 
     if(interaction){
-      say("Pressione E para " + interaction.label, 3);
+      say(interactionPrompt(interaction.label), 3);
 
       if(consume("e"," ","enter")){
         interaction.action();
@@ -1366,7 +1375,7 @@ if (state.screen === "menu") {
         return;
       }
 
-      say("Pressione E para entrar em " + door.label, 3);
+      say(isTouchDevice ? "Entrar em " + door.label : "Pressione E para entrar em " + door.label, 3);
 
       if(consume("e"," ","enter")){
         beginRoomTransition(door.target, door.spawn);

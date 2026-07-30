@@ -1,19 +1,9 @@
-LUCAS QUEST — VERSÃO FINAL PARA NAVEGADOR
+LUCAS QUEST — VERSÃO MOBILE CORRIGIDA
 
-COMO TESTAR NO COMPUTADOR
-1. Abra o arquivo index.html.
-2. Use as setas ou WASD para andar.
-3. Use E/Enter para interagir e TAB para o inventário.
+• Jogue com o celular na horizontal.
+• Setas na esquerda: movimentação.
+• INTERAGIR: substitui a tecla E, inclusive dentro dos puzzles.
+• Mochila: abre e fecha o inventário.
+• O teclado de letras/números aparece automaticamente quando necessário.
 
-COMO JOGAR NO CELULAR
-- Publique a pasta completa em um serviço de hospedagem de páginas estáticas.
-- Abra o link pelo navegador do celular, de preferência com o aparelho na horizontal.
-- Os controles aparecem automaticamente na tela.
-- Nos desafios de letras e números, aparece um teclado próprio abaixo do jogo.
-
-PARA GERAR O QR CODE
-- Depois de publicar, gere um QR Code usando o endereço público da página.
-- Não é necessário instalar aplicativo.
-
-IMPORTANTE
-- Mantenha index.html, style.css, js e assets juntos, exatamente nesta estrutura.
+Para publicar, envie todo o conteúdo desta pasta para o GitHub Pages.
