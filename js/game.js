@@ -1023,7 +1023,7 @@ if([
     saveHitboxOverrides();
   },{passive:false});
 
-  canvas.addEventListener("click", (event) => {
+  canvas.addEventListener("pointerdown", (event) => {
     ensureAudio();
 
     if(state.editor.enabled) return;
@@ -1487,41 +1487,6 @@ if (state.screen === "menu") {
       return;
     }
 
-    if(puzzle.type==="sequence"){
-  const buttons = [
-    [1,330],
-    [2,480],
-    [3,630]
-  ];
-
-  for(const [number,bx] of buttons){
-    if(
-      x>=bx-50 &&
-      x<=bx+50 &&
-      y>=235 &&
-      y<=315
-    ){
-      puzzle.sequence.push(number);
-
-      const index = puzzle.sequence.length - 1;
-
-      if(puzzle.sequence[index] !== puzzle.target[index]){
-        puzzle.sequence = [];
-        playErrorSound();
-        say("Sequência errada. Tente novamente.",130);
-      }else if(puzzle.sequence.length === 3){
-        state.activePuzzle = {
-          type:"lunchbox",
-          stage:0
-        };
-      }
-
-      return true;
-    }
-  }
-
-  return true;
-}
 
     if(puzzle.type==="drawerChoice"){
   if(consume("arrowleft","a")){
