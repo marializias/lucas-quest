@@ -1341,8 +1341,27 @@ if (state.screen === "menu") {
   }
 
   function say(text, time = 160){
-    state.message = text;
+
+  const novaMensagemEhDica = text.startsWith("Toque para");
+  const mensagemAtualEhDica = state.message.startsWith("Toque para");
+
+  // Uma dica não pode apagar uma mensagem importante que ainda está visível
+  if(
+    novaMensagemEhDica &&
+    state.messageTimer > 0 &&
+    !mensagemAtualEhDica
+  ){
+    return;
+  }
+
+  state.message = text;
+
+  // Mensagens importantes duram pelo menos 5 segundos
+  if(novaMensagemEhDica){
+    state.messageTimer = time;
+  }else{
     state.messageTimer = Math.max(time, 300);
+  }
 }
 
   function addItem(key, label){
