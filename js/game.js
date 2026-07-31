@@ -1523,34 +1523,55 @@ if (state.screen === "menu") {
   }
 
   function updateWorldInteractions(){
-    if(state.activePuzzle || state.inventoryOpen) return;
+  if(state.activePuzzle || state.inventoryOpen) return;
 
-    const interaction = nearbyInteraction();
-    const door = nearbyDoor();
+  const interaction = nearbyInteraction();
+  const door = nearbyDoor();
 
-    if(interaction){
-      say("Toque para " + interaction.label, 180);
+  if(interaction){
 
-      if(consume("e"," ","enter")){
-        interaction.action();
-      }
+    if(consume("e"," ","enter")){
+      interaction.action();
       return;
     }
 
-    if(door){
-      if(door.target==="bathroom" && !state.useful.bathroomKey){
-        say("A porta do banheiro está trancada. Talvez exista uma chave no quarto da Maria Laura.",3);
-        if(consume("e"," ","enter")) playErrorSound();
-        return;
-      }
+    if(state.messageTimer <= 0){
+      say("Toque para " + interaction.label, 180);
+    }
 
-      say("Toque para entrar em " + door.label, 180);
+    return;
+  }
+
+  if(door){
+
+    if(door.target==="bathroom" && !state.useful.bathroomKey){
 
       if(consume("e"," ","enter")){
-        beginRoomTransition(door.target, door.spawn);
+        playErrorSound();
+        say(
+          "A porta do banheiro está trancada. Talvez exista uma chave no quarto da Maria Laura.",
+          300
+        );
+      }else if(state.messageTimer <= 0){
+        say(
+          "A porta do banheiro está trancada. Talvez exista uma chave no quarto da Maria Laura.",
+          180
+        );
       }
+
+      return;
+    }
+
+    if(consume("e"," ","enter")){
+      beginRoomTransition(door.target,door.spawn);
+      return;
+    }
+
+    if(state.messageTimer <= 0){
+      say("Toque para entrar em " + door.label,180);
     }
   }
+}
 
   function consumeLetter(){
     const letters="abcdefghijklmnopqrstuvwxyz";
