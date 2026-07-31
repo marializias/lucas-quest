@@ -973,44 +973,55 @@ if(puzzle.type==="suitcaseOpen"){
 
 if(puzzle.type==="wordLock"){
 
-  const letters=[...new Set(puzzle.answer.split(""))];
+  const rows=[
+    ["A","B","C","D","E","F","G"],
+    ["H","I","J","K","L","M","N"],
+    ["O","P","Q","R","S","T","U"],
+    ["V","W","X","Y","Z"]
+  ];
 
-  for(let i=0;i<letters.length;i++){
+  for(let rowIndex=0;rowIndex<rows.length;rowIndex++){
 
-    const bx=260+i*90;
+    const row=rows[rowIndex];
+    const startX=480-((row.length-1)*40);
+    const by=240+rowIndex*55;
 
-    if(
-      x>=bx-35 &&
-      x<=bx+35 &&
-      y>=263 &&
-      y<=307
-    ){
+    for(let index=0;index<row.length;index++){
 
-      if(puzzle.input.length<puzzle.answer.length){
-        puzzle.input+=letters[i];
+      const bx=startX+index*80;
+
+      if(
+        x>=bx-28 &&
+        x<=bx+28 &&
+        y>=by-20 &&
+        y<=by+20
+      ){
+        if(puzzle.input.length<puzzle.answer.length){
+          puzzle.input+=row[index];
+        }
+
+        return true;
       }
-
-      return true;
     }
   }
 
-  // Apagar
+  // Botão apagar
   if(
-    x>=280 &&
-    x<=370 &&
-    y>=365 &&
-    y<=410
+    x>=250 &&
+    x<=350 &&
+    y>=455 &&
+    y<=497
   ){
     puzzle.input=puzzle.input.slice(0,-1);
     return true;
   }
 
-  // OK
+  // Botão OK
   if(
-    x>=590 &&
-    x<=680 &&
-    y>=365 &&
-    y<=410
+    x>=610 &&
+    x<=710 &&
+    y>=455 &&
+    y<=497
   ){
     finishWordLock(puzzle);
     return true;
@@ -2310,7 +2321,6 @@ ctx.fillRect(0,0,60,60);
     }
 
     if(p.type==="wordLock"){
-      drawText("NOVO TECLADO",480,40,20,"red","center","bold");
   drawText(p.title+" TRANCADO",480,90,30,"#392615","center","bold");
   drawText(p.hint,480,130,20,"#60462e","center");
 
