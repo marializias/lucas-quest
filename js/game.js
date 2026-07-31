@@ -999,10 +999,10 @@ if(puzzle.type==="mirrorClean"){
 if(puzzle.type==="toothbrushCup"){
 
   if(
-    x>=300 &&
-    x<=660 &&
-    y>=150 &&
-    y<=420
+    x>=425 &&
+    x<=535 &&
+    y>=190 &&
+    y<=365
   ){
 
     puzzle.stage++;
