@@ -920,6 +920,22 @@ if(puzzle.type==="lunchbox"){
   return true;
 }
 
+if(puzzle.type==="ovenJoke"){
+
+  if(
+    x>=420 &&
+    x<=540 &&
+    y>=210 &&
+    y<=390
+  ){
+    state.activePuzzle=null;
+    say("TDAH ataca novamente...",240);
+    return true;
+  }
+
+  return true;
+}
+
     if(puzzle.type==="drawerChoice"){
 
   const drawerX = [300,480,660];
