@@ -974,13 +974,13 @@ if(puzzle.type==="suitcaseOpen"){
 if(puzzle.type==="mirrorClean"){
 
   if(
-    x>=250 &&
-    x<=710 &&
-    y>=120 &&
-    y<=420
+    x>=280 &&
+    x<=680 &&
+    y>=170 &&
+    y<=350
   ){
 
-    puzzle.progress+=20;
+    puzzle.progress += 20;
 
     if(puzzle.progress>=100){
       state.flags.mirrorRead=true;
