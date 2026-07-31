@@ -936,6 +936,17 @@ if(puzzle.type==="ovenJoke"){
   return true;
 }
 
+if(puzzle.type==="hallwayShelf"){
+
+  puzzle.page++;
+
+  if(puzzle.page>3){
+    state.activePuzzle=null;
+  }
+
+  return true;
+}
+
     if(puzzle.type==="drawerChoice"){
 
   const drawerX = [300,480,660];
