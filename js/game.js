@@ -1,4 +1,5 @@
 (() => {
+  console.log("GAME 1.4 CARREGADO");
   "use strict";
 
   const canvas = document.getElementById("game");
