@@ -998,22 +998,12 @@ if(puzzle.type==="mirrorClean"){
 
 if(puzzle.type==="toothbrushCup"){
 
-  if(
-    x>=425 &&
-    x<=535 &&
-    y>=190 &&
-    y<=365
-  ){
+  puzzle.stage++;
 
-    puzzle.stage++;
-
-    if(puzzle.stage>=3){
-      state.activePuzzle=null;
-      state.flags.toothbrushCupChecked=true;
-      addItem("carKey","Chave do carro");
-    }
-
-    return true;
+  if(puzzle.stage>=3){
+    state.activePuzzle=null;
+    state.flags.toothbrushCupChecked=true;
+    addItem("carKey","Chave do carro");
   }
 
   return true;
