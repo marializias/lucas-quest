@@ -2309,6 +2309,7 @@ ctx.fillRect(0,0,60,60);
     }
 
     if(p.type==="wordLock"){
+      drawText("NOVO TECLADO",480,40,20,"red","center","bold");
   drawText(p.title+" TRANCADO",480,90,30,"#392615","center","bold");
   drawText(p.hint,480,130,20,"#60462e","center");
 
