@@ -947,18 +947,6 @@ if([
   canvas.addEventListener("pointerdown",(event)=>{
     if(!state.editor.enabled || state.screen !== "game") return;
 
-    event.preventDefault();
-    const point = canvasPoint(event);
-    const selected = findEditorHitbox(point.x,point.y);
-    state.editor.selected = selected;
-
-    if(selected){
-      state.editor.dragging = true;
-      state.editor.dragOffsetX = point.x-selected.x;
-      state.editor.dragOffsetY = point.y-selected.y;
-      canvas.setPointerCapture?.(event.pointerId);
-    }
-});
 
     event.preventDefault();
     const point = canvasPoint(event);
