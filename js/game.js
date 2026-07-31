@@ -1027,6 +1027,7 @@ if([
 
   canvas.addEventListener("pointerdown", (event) => {
     ensureAudio();
+    event.preventDefault();
 
     if(state.editor.enabled) return;
 
