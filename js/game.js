@@ -427,7 +427,7 @@
           answer:"MAIO",
           input:"",
           title:"MALA",
-          hint:"Mês em que todo mundo soube da gente..."
+          hint:"Mês que você e a mamãe começaram a namorar..."
         };
       }
     },
@@ -1342,8 +1342,8 @@ if (state.screen === "menu") {
 
   function say(text, time = 160){
     state.message = text;
-    state.messageTimer = time;
-  }
+    state.messageTimer = Math.max(time, 300);
+}
 
   function addItem(key, label){
     if(state.collected[key]) return;
@@ -1529,7 +1529,7 @@ if (state.screen === "menu") {
     const door = nearbyDoor();
 
     if(interaction){
-      say("Pressione E para " + interaction.label, 3);
+      say("Toque para " + interaction.label, 180);
 
       if(consume("e"," ","enter")){
         interaction.action();
@@ -1544,7 +1544,7 @@ if (state.screen === "menu") {
         return;
       }
 
-      say("Pressione E para entrar em " + door.label, 3);
+      say("Toque para entrar em " + door.label, 180);
 
       if(consume("e"," ","enter")){
         beginRoomTransition(door.target, door.spawn);
@@ -2223,7 +2223,7 @@ ctx.fillRect(0,0,60,60);
 
     if(p.type==="sofa"){
       drawText("PROCURANDO NO SOFÁ",480,115,30,"#392615","center","bold");
-      drawText("Pressione E para levantar cada almofada.",480,175,21,"#60462e","center");
+      drawText("Toque para levantar cada almofada.",480,175,21,"#60462e","center");
       [310,480,650].forEach((x,i)=>{
         ctx.fillStyle=i<p.cushion?"#b4b4b4":"#858585";
         ctx.fillRect(x-65,i<p.cushion?245:275,130,70);
@@ -2293,7 +2293,7 @@ ctx.fillRect(0,0,60,60);
       drawText("M",490,230,54,"#d4b34c","center","bold");
       drawText("=",575,230,44,"#392615","center","bold");
       drawText("ML",680,230,54,"#bd5d5d","center","bold");
-      drawText("Pressione E para guardar a pista.",480,385,19,"#60462e","center");
+      drawText("Toque para guardar a pista.",480,385,19,"#60462e","center");
     }
 
     if(p.type==="sequence"){
@@ -2334,7 +2334,7 @@ ctx.fillRect(0,0,60,60);
       drawText("DENTRO DA GELADEIRA",480,115,30,"#392615","center","bold");
       ctx.fillStyle="#b46d4c";ctx.fillRect(370,230,220,110);
       ctx.fillStyle=p.stage?"#5f3a29":"#d7b28d";ctx.fillRect(380,p.stage?190:215,200,35);
-      drawText(p.stage?"Pressione E para pegar o smartwatch.":"Pressione E para abrir a marmita.",480,395,20,"#60462e","center");
+      drawText(p.stage?"Toque para pegar o smartwatch.":"Toque para abrir a marmita.",480,395,20,"#60462e","center");
     }
 
     if(p.type==="ovenJoke"){
@@ -2342,7 +2342,7 @@ ctx.fillRect(0,0,60,60);
       ctx.fillStyle="#e8edf0";ctx.fillRect(420,210,120,180);
       ctx.fillStyle="#6d8fb2";ctx.fillRect(455,245,50,95);
       drawText("Uma garrafa de iogurte.",480,420,20,"#60462e","center");
-      drawText("Pressione E.",480,452,17,"#60462e","center");
+      drawText("Toque na tela",480,452,17,"#60462e","center");
     }
 
     if(p.type==="hallwayShelf"){
@@ -2354,7 +2354,7 @@ ctx.fillRect(0,0,60,60);
       ];
       drawText("ESTANTE DO CORREDOR",480,120,30,"#392615","center","bold");
       drawText(messages[Math.min(p.page,3)],480,270,23,"#60462e","center");
-      drawText("Pressione E para continuar.",480,410,19,"#60462e","center");
+      drawText("Toque para continuar.",480,410,19,"#60462e","center");
     }
 
     if(p.type==="wordLock"){
@@ -2426,7 +2426,7 @@ ctx.fillRect(0,0,60,60);
       if(p.stage===0){
         ctx.fillStyle="#9a6b83";
         ctx.fillRect(370,250,220,65);
-        drawText("Pressione E para afastar as roupas.",480,420,20,"#60462e","center");
+        drawText("Toque para afastar as roupas.",480,420,20,"#60462e","center");
       }else{
         ctx.fillStyle="#d8d0c8";
         ctx.fillRect(370,250,220,65);
@@ -2435,7 +2435,7 @@ ctx.fillRect(0,0,60,60);
         ctx.fillRect(468,270,45,18);
         ctx.fillRect(503,263,9,32);
 
-        drawText("Pressione E para pegar a chave da casa.",480,420,20,"#60462e","center");
+        drawText("Toque para pegar a chave da casa.",480,420,20,"#60462e","center");
       }
     }
 
@@ -2444,7 +2444,7 @@ ctx.fillRect(0,0,60,60);
       ctx.fillStyle="#d5d9dc";ctx.fillRect(280,170,400,180);
       ctx.fillStyle="#8fa8b4";ctx.fillRect(280,170,400*(p.progress/100),180);
       drawText(`Limpeza: ${p.progress}%`,480,405,22,"#60462e","center","bold");
-      drawText("Pressione E repetidamente.",480,440,18,"#60462e","center");
+      drawText("Toque repetidamente.",480,440,18,"#60462e","center");
     }
 
     if(p.type==="toothbrushCup"){
@@ -2452,7 +2452,7 @@ ctx.fillRect(0,0,60,60);
       drawText(["Retire as escovas.","Retire o copo.","A chave está no fundo!"][Math.min(p.stage,2)],480,205,23,"#60462e","center");
       ctx.fillStyle="#9da4a8";ctx.fillRect(425,245,110,120);
       for(let i=p.stage;i<3;i++){ctx.fillStyle=["#555","#777","#999"][i];ctx.fillRect(445+i*25,190,8,75);}
-      drawText("Pressione E.",480,420,19,"#60462e","center");
+      drawText("Toque na tela",480,420,19,"#60462e","center");
     }
 
     drawText("ESC para sair",480,468,16,"#60462e","center");
