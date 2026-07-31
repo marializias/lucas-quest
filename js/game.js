@@ -2309,8 +2309,8 @@ ctx.fillRect(0,0,60,60);
     }
 
     if(p.type==="wordLock"){
-  drawText(p.title+" TRANCADO",480,100,30,"#392615","center","bold");
-  drawText(p.hint,480,145,20,"#60462e","center");
+  drawText(p.title+" TRANCADO",480,90,30,"#392615","center","bold");
+  drawText(p.hint,480,130,20,"#60462e","center");
 
   drawText(
     (p.input+"_".repeat(p.answer.length))
@@ -2318,36 +2318,45 @@ ctx.fillRect(0,0,60,60);
       .split("")
       .join("  "),
     480,
-    195,
+    175,
     34,
     "#392615",
     "center",
     "bold"
   );
 
-  const letters=[...new Set(p.answer.split(""))];
+  const rows=[
+    ["A","B","C","D","E","F","G"],
+    ["H","I","J","K","L","M","N"],
+    ["O","P","Q","R","S","T","U"],
+    ["V","W","X","Y","Z"]
+  ];
 
-  letters.forEach((letter,index)=>{
-    const x=260+index*90;
-    const y=285;
+  rows.forEach((row,rowIndex)=>{
+    const startX=480-((row.length-1)*40);
+    const y=240+rowIndex*55;
 
-    ctx.fillStyle="#9b6841";
-    ctx.fillRect(x-35,y-22,70,44);
+    row.forEach((letter,index)=>{
+      const x=startX+index*80;
 
-    ctx.strokeStyle="#5b3c24";
-    ctx.lineWidth=2;
-    ctx.strokeRect(x-35,y-22,70,44);
+      ctx.fillStyle="#9b6841";
+      ctx.fillRect(x-28,y-20,56,40);
 
-    drawText(letter,x,y+8,22,"#fff","center","bold");
+      ctx.strokeStyle="#5b3c24";
+      ctx.lineWidth=2;
+      ctx.strokeRect(x-28,y-20,56,40);
+
+      drawText(letter,x,y+7,20,"#fff","center","bold");
+    });
   });
 
   ctx.fillStyle="#b15d5d";
-  ctx.fillRect(280,365,90,45);
-  drawText("⌫",325,394,20,"#fff","center","bold");
+  ctx.fillRect(250,455,100,42);
+  drawText("⌫",300,482,20,"#fff","center","bold");
 
   ctx.fillStyle="#7c9c70";
-  ctx.fillRect(590,365,90,45);
-  drawText("OK",635,394,20,"#fff","center","bold");
+  ctx.fillRect(610,455,100,42);
+  drawText("OK",660,482,20,"#fff","center","bold");
 }
 
     if(p.type==="suitcaseOpen"){
