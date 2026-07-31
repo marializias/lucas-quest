@@ -427,7 +427,7 @@
           answer:"MAIO",
           input:"",
           title:"MALA",
-          hint:"Mês em que tudo começou..."
+          hint:"Mês em que todo mundo soube da gente..."
         };
       }
     },
@@ -942,6 +942,30 @@ if(puzzle.type==="hallwayShelf"){
 
   if(puzzle.page>3){
     state.activePuzzle=null;
+  }
+
+  return true;
+}
+
+if(puzzle.type==="suitcaseOpen"){
+
+  if(
+    x>=330 &&
+    x<=630 &&
+    y>=175 &&
+    y<=370
+  ){
+
+    puzzle.stage++;
+
+    if(puzzle.stage===1){
+      say("A mala está aberta. Tem alguma coisa embaixo das roupas.",180);
+    }else if(puzzle.stage>=2){
+      state.activePuzzle=null;
+      addItem("houseKey","Chave da casa");
+    }
+
+    return true;
   }
 
   return true;
