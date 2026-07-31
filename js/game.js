@@ -2171,6 +2171,7 @@ rooms[state.room].obstacles.forEach(o => {
     ctx.fillStyle = "#ff0000";
 ctx.fillRect(0,0,60,60);
     const p=state.activePuzzle;
+    drawText("TIPO: " + p.type, 480, 25, 18, "#ff0000", "center", "bold");
 
     if(p.type==="sofa"){
       drawText("PROCURANDO NO SOFÁ",480,115,30,"#392615","center","bold");
