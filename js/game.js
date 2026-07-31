@@ -971,6 +971,54 @@ if(puzzle.type==="suitcaseOpen"){
   return true;
 }
 
+if(puzzle.type==="wordLock"){
+
+  const letters=[...new Set(puzzle.answer.split(""))];
+
+  for(let i=0;i<letters.length;i++){
+
+    const bx=260+i*90;
+
+    if(
+      x>=bx-35 &&
+      x<=bx+35 &&
+      y>=263 &&
+      y<=307
+    ){
+
+      if(puzzle.input.length<puzzle.answer.length){
+        puzzle.input+=letters[i];
+      }
+
+      return true;
+    }
+  }
+
+  // Apagar
+  if(
+    x>=280 &&
+    x<=370 &&
+    y>=365 &&
+    y<=410
+  ){
+    puzzle.input=puzzle.input.slice(0,-1);
+    return true;
+  }
+
+  // OK
+  if(
+    x>=590 &&
+    x<=680 &&
+    y>=365 &&
+    y<=410
+  ){
+    finishWordLock(puzzle);
+    return true;
+  }
+
+  return true;
+}
+
     if(puzzle.type==="drawerChoice"){
 
   const drawerX = [300,480,660];
@@ -1493,7 +1541,7 @@ if (state.screen === "menu") {
   }
 
   function checkTvPassword(puzzle){
-    if(puzzle.digits === "9633"){
+    if(puzzle.digits === "7741"){
       state.flags.tvUnlocked = true;
       state.flags.phoneRevealed = true;
       state.activePuzzle = null;
@@ -1547,7 +1595,7 @@ if (state.screen === "menu") {
       }
       if(consume("backspace")) puzzle.digits=puzzle.digits.slice(0,-1);
       if(consume("e"," ","enter")){
-        if(puzzle.digits==="9633"){
+        if(puzzle.digits==="7741"){
           state.flags.tvUnlocked=true;
           state.flags.phoneRevealed=true;
           state.activePuzzle=null;
@@ -2261,11 +2309,46 @@ ctx.fillRect(0,0,60,60);
     }
 
     if(p.type==="wordLock"){
-      drawText(p.title+" TRANCADO",480,110,30,"#392615","center","bold");
-      drawText(p.hint,480,180,22,"#60462e","center");
-      drawText((p.input+"_".repeat(p.answer.length)).slice(0,p.answer.length).split("").join("  "),480,285,34,"#392615","center","bold");
-      drawText("Digite no teclado e pressione ENTER.",480,390,20,"#60462e","center");
-    }
+  drawText(p.title+" TRANCADO",480,100,30,"#392615","center","bold");
+  drawText(p.hint,480,145,20,"#60462e","center");
+
+  drawText(
+    (p.input+"_".repeat(p.answer.length))
+      .slice(0,p.answer.length)
+      .split("")
+      .join("  "),
+    480,
+    195,
+    34,
+    "#392615",
+    "center",
+    "bold"
+  );
+
+  const letters=[...new Set(p.answer.split(""))];
+
+  letters.forEach((letter,index)=>{
+    const x=260+index*90;
+    const y=285;
+
+    ctx.fillStyle="#9b6841";
+    ctx.fillRect(x-35,y-22,70,44);
+
+    ctx.strokeStyle="#5b3c24";
+    ctx.lineWidth=2;
+    ctx.strokeRect(x-35,y-22,70,44);
+
+    drawText(letter,x,y+8,22,"#fff","center","bold");
+  });
+
+  ctx.fillStyle="#b15d5d";
+  ctx.fillRect(280,365,90,45);
+  drawText("⌫",325,394,20,"#fff","center","bold");
+
+  ctx.fillStyle="#7c9c70";
+  ctx.fillRect(590,365,90,45);
+  drawText("OK",635,394,20,"#fff","center","bold");
+}
 
     if(p.type==="suitcaseOpen"){
       drawText("MALA ABERTA",480,110,30,"#392615","center","bold");
