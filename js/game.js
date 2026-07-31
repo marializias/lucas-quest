@@ -898,6 +898,28 @@ if([
   return true;
 }
 
+if(puzzle.type==="lunchbox"){
+
+  if(
+    x>=370 &&
+    x<=590 &&
+    y>=215 &&
+    y<=340
+  ){
+
+    puzzle.stage++;
+
+    if(puzzle.stage>=2){
+      state.activePuzzle=null;
+      addItem("watch","Smartwatch");
+    }
+
+    return true;
+  }
+
+  return true;
+}
+
     if(puzzle.type==="drawerChoice"){
 
   const drawerX = [300,480,660];
