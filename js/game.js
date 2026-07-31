@@ -996,6 +996,29 @@ if(puzzle.type==="mirrorClean"){
   return true;
 }
 
+if(puzzle.type==="toothbrushCup"){
+
+  if(
+    x>=300 &&
+    x<=660 &&
+    y>=150 &&
+    y<=420
+  ){
+
+    puzzle.stage++;
+
+    if(puzzle.stage>=3){
+      state.activePuzzle=null;
+      state.flags.toothbrushCupChecked=true;
+      addItem("carKey","Chave do carro");
+    }
+
+    return true;
+  }
+
+  return true;
+}
+
 if(puzzle.type==="wordLock"){
 
   const rows=[
