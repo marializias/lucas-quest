@@ -947,7 +947,26 @@ if([
 
     alert("pointerdown");
 
-    if(!state.editor.enabled || state.screen !== "game") return;
+    if(state.editor.enabled && state.screen === "game"){
+
+        event.preventDefault();
+
+        const point = canvasPoint(event);
+
+        const selected = findEditorHitbox(point.x,point.y);
+
+        state.editor.selected = selected;
+
+        if(selected){
+            state.editor.dragging = true;
+            state.editor.dragOffsetX = point.x-selected.x;
+            state.editor.dragOffsetY = point.y-selected.y;
+            canvas.setPointerCapture?.(event.pointerId);
+        }
+
+    }
+
+});
 
     event.preventDefault();
     const point = canvasPoint(event);
