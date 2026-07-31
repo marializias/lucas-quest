@@ -944,6 +944,9 @@ if([
 
 
   canvas.addEventListener("pointerdown",(event)=>{
+
+    alert("pointerdown");
+
     if(!state.editor.enabled || state.screen !== "game") return;
 
     event.preventDefault();
