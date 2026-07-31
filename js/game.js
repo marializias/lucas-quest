@@ -959,7 +959,7 @@ if([
       state.editor.dragOffsetY = point.y-selected.y;
       canvas.setPointerCapture?.(event.pointerId);
     }
-  );
+   });
 
   canvas.addEventListener("pointermove",(event)=>{
 
