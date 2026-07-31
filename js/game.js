@@ -971,6 +971,31 @@ if(puzzle.type==="suitcaseOpen"){
   return true;
 }
 
+if(puzzle.type==="mirrorClean"){
+
+  if(
+    x>=250 &&
+    x<=710 &&
+    y>=120 &&
+    y<=420
+  ){
+
+    puzzle.progress+=20;
+
+    if(puzzle.progress>=100){
+      state.flags.mirrorRead=true;
+      state.flags.mirrorArrowVisible=true;
+      state.activePuzzle=null;
+      playItemSound();
+      say("O espelho limpo mostra uma seta apontando para o reflexo do porta-escovas.",300);
+    }
+
+    return true;
+  }
+
+  return true;
+}
+
 if(puzzle.type==="wordLock"){
 
   const rows=[
@@ -2182,7 +2207,6 @@ rooms[state.room].obstacles.forEach(o => {
     ctx.fillStyle = "#ff0000";
 ctx.fillRect(0,0,60,60);
     const p=state.activePuzzle;
-    drawText("TIPO: " + p.type, 480, 25, 18, "#ff0000", "center", "bold");
 
     if(p.type==="sofa"){
       drawText("PROCURANDO NO SOFÁ",480,115,30,"#392615","center","bold");
